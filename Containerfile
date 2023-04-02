@@ -12,7 +12,7 @@ COPY \
   --from=builder \
   --chmod=444 \
   /project/target/*.jar app.jar
-CMD [ "java", "-jar", "app.jar" ]
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
 
 FROM gcr.io/distroless/java17:nonroot AS distroless-runner
 COPY \
