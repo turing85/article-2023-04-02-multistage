@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.6_10-jdk-alpine AS builder
+FROM docker.io/eclipse-temurin:17.0.6_10-jdk-alpine AS builder
 RUN mkdir /project
 WORKDIR /project
 COPY . .
@@ -7,7 +7,7 @@ RUN ./mvnw package
 FROM builder AS alpine-jdk-runner
 ENTRYPOINT [ "java", "-jar", "target/article-2023-04-02-multistage-1.0-SNAPSHOT.jar" ]
 
-FROM eclipse-temurin:17.0.6_10-jre-alpine AS alpine-runner
+FROM docker.io/eclipse-temurin:17.0.6_10-jre-alpine AS alpine-runner
 COPY \
   --from=builder \
   --chmod=444 \
